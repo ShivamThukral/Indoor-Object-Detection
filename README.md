@@ -1,2 +1,2 @@
 # Indoor-Object-Detection
-Real-time indoor object detection using votenet and Robotic Operating System
+Real-time indoor object detection using Votenet and Robotic Operating System (ROS)
