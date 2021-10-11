@@ -20,8 +20,6 @@ des_frame = "odom"                  # -- enable for simulation
 OBJECTNESS_THRESHOLD = 0.75         # threshold of object confidence
 RVIZ_VIZ_DURATION = 4.0             # in seconds
 
-WHITE_LIST = ['table','toilet']
-
 class Votenet_ROS:
     def __init__(self):
         #self.subscriber_rviz = rospy.Subscriber("/votenet/pcd",PointCloud2 , self.callback, queue_size=1)
@@ -59,7 +57,7 @@ class Votenet_ROS:
         # visualise only confident values (>=0.85)
         corners = []
         for i in range(len(all_detections)):
-            if all_detections[i][1] < OBJECTNESS_THRESHOLD or (all_detections[i][0] not in WHITE_LIST):
+            if all_detections[i][1] < OBJECTNESS_THRESHOLD:
                 continue
             for j in range(len(all_detections[i][2])):
                 p = Point()
@@ -94,7 +92,7 @@ class Votenet_ROS:
         detection_array.depth_image = self.depth_image
         for i in range(len(all_detections)):
             #filter for objects in the whitelist only and object score
-            if all_detections[i][1] < OBJECTNESS_THRESHOLD or (all_detections[i][0] not in WHITE_LIST):
+            if all_detections[i][1] < OBJECTNESS_THRESHOLD:
                 continue
             detection = votenetDetection()
             detection.semantic_class = all_detections[i][0]  # 0 : semantic class in string
